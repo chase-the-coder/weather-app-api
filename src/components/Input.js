@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { ThemeContext } from './ThemeContext';
+import '../styles/Input.css';
 
 function Input() {
 	const [ input, setInput ] = useState('');
@@ -8,7 +9,13 @@ function Input() {
 	return (
 		<form>
 			<label htmlFor="location" />
-			<input type="text" id="location" value={input} onChange={(e) => setInput(e.target.value)} />
+			<input
+				className="input-centered"
+				type="text"
+				id="location"
+				value={input}
+				onChange={(e) => setInput(e.target.value)}
+			/>
 		</form>
 	);
 }
