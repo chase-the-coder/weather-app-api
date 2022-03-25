@@ -106,7 +106,7 @@ function App() {
       <div className='container'>
         <div className="dropdown">
           <Input userInput={userInput} onInputChange={handleInputChange}/>
-          <Dropdown />
+          <Dropdown cityList={cityList}/>
         </div>
       </div>
     </>

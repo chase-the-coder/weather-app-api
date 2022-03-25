@@ -1,12 +1,14 @@
 import React from 'react';
 import '../styles/Dropdown.css';
 
-export default function Dropdown({ input }) {
+export default function Dropdown(props) {
+	console.log(props.cityList);
 	return (
 		<div className="centered">
 			<ul className="dropdown-content">
-				<li>link1</li>
-				<li>link 2</li>
+				{props.cityList.map((city) => {
+					return <li key={city.woeid}>{city.title}</li>;
+				})}
 			</ul>
 		</div>
 	);
