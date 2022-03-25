@@ -76,8 +76,8 @@ function App() {
     ]
   const [ userInput, setUserInput ] = useState('');
   const [cityList, setCityList] = useState([]);
-  const [location, setLocation] = useState('london');
-  const [locationData, setLocationData] = useState([])
+  const [location, setLocation] = useState('london')
+  const [cityObject, setCityObject] = useState([])
 	const context = useContext(ThemeContext);
 
   useEffect(() => {
@@ -86,16 +86,17 @@ function App() {
     }
     const delayDebounceFn = setTimeout(() => {
       console.log(userInput)
-      axios
-			.get(
-				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
-			)
-			.then((res) => {
-        console.log(res.data)
-        setCityList(res.data)
+      setCityList(fakeLocationData)
+      // axios
+			// .get(
+			// 	`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
+			// )
+			// .then((res) => {
+      //   console.log(res.data)
+      //   setCityList(res.data)
 
         
-      })
+      // })
     }, 3000)
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])
@@ -105,19 +106,26 @@ function App() {
   }
   function handleLocationSelect(e, newLocation) {
     e.preventDefault()
-    setLocation(newLocation)  
-    console.log(location)
+    console.log(newLocation)
+    cityList.forEach(city => {
+      if (newLocation === city.title) {
+        setCityObject(city)
+      }
+      setUserInput('')
+      // console.log(city)
+    })
+    
     
   }
-  // console.log(location)
+  console.log(cityObject)
   // console.log(userInput)
 	return (
 
     <>
       <div className='container'>
         <div className="dropdown">
-          <Input location={location} userInput={userInput} onLocationSelect={handleLocationSelect} onInputChange={handleInputChange} cityList={fakeLocationData}/>
-          <Forecast cityList={fakeLocationData} location={location} />
+          <Input location={location} userInput={userInput} onLocationSelect={handleLocationSelect} onInputChange={handleInputChange} cityList={cityList}/>
+          <Forecast cityObject={cityObject}   />
         </div>
       </div>
     </>
