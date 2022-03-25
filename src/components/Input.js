@@ -5,10 +5,9 @@ import { ThemeContext } from './ThemeContext';
 function Input() {
 	const [ input, setInput ] = useState('');
 	const context = useContext(ThemeContext);
-	console.log(input);
 	return (
 		<form>
-			<label htmlFor="location">Location</label>
+			<label htmlFor="location" />
 			<input type="text" id="location" value={input} onChange={(e) => setInput(e.target.value)} />
 		</form>
 	);
