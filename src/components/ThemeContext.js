@@ -19,3 +19,4 @@ function ThemeProvider(props) {
 	};
 	return <ThemeContext.Provider value={value}>{props.children}</ThemeContext.Provider>;
 }
+export { ThemeContext, ThemeProvider };
