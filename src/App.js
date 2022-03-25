@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
 import Input from './components/Input';
+import Forecast from './components/Forecast';
 import './styles/App.css'
 import { useState } from 'react';
 function App() {
@@ -74,8 +75,9 @@ function App() {
     }
     ]
   const [ userInput, setUserInput ] = useState('');
-  const [cityList, setCityList] = useState(fakeLocationData);
+  const [cityList, setCityList] = useState([]);
   const [location, setLocation] = useState('london');
+  const [locationData, setLocationData] = useState([])
 	const context = useContext(ThemeContext);
 
   useEffect(() => {
@@ -90,21 +92,32 @@ function App() {
 			)
 			.then((res) => {
         console.log(res.data)
+        setCityList(res.data)
+
         
       })
     }, 3000)
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])
 
-  function handleInputChange(e) {
-    setUserInput(e)
+  function handleInputChange(newInputValue) {
+    setUserInput(newInputValue)
   }
+  function handleLocationSelect(e, newLocation) {
+    e.preventDefault()
+    setLocation(newLocation)  
+    console.log(location)
+    
+  }
+  // console.log(location)
+  // console.log(userInput)
 	return (
 
     <>
       <div className='container'>
         <div className="dropdown">
-          <Input userInput={userInput} onInputChange={handleInputChange} cityList={cityList}/>
+          <Input location={location} userInput={userInput} onLocationSelect={handleLocationSelect} onInputChange={handleInputChange} cityList={fakeLocationData}/>
+          <Forecast cityList={fakeLocationData} location={location} />
         </div>
       </div>
     </>

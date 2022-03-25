@@ -11,6 +11,13 @@ function Input(props) {
 		<form>
 			<Autocomplete
 				freeSolo
+				disableClearable
+				onChange={(event, newValue) => {
+					props.onLocationSelect(event, newValue);
+				}}
+				onInputChange={(event, newInputValue) => {
+					props.onInputChange(newInputValue);
+				}}
 				id="city-drobdown"
 				options={props.cityList.map((city) => city.title)}
 				renderInput={(params) => (
