@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ThemeContext } from './ThemeContext';
 import Dropdown from './Dropdown';
 import '../styles/Input.css';
-
+import Button from '@mui/material/Button';
 function Input(props) {
 	const context = useContext(ThemeContext);
 	return (
@@ -16,6 +16,7 @@ function Input(props) {
 				value={props.userInput}
 				onChange={(e) => props.onInputChange(e.target.value)}
 			/>
+			<Button variant="contained">Hello World</Button>
 		</form>
 	);
 }
