@@ -181,10 +181,10 @@ export default function Forecast(props) {
         
       // })
     },[])
-
+    // console.log(forecastData.consolidated_weather[0])
 	return (
         <>
-            <MediaCard forecastData={forecastData} />
+            <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
         </>
     )
 }
