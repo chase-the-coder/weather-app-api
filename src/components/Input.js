@@ -1,22 +1,29 @@
 import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { ThemeContext } from './ThemeContext';
-import Dropdown from './Dropdown';
 import '../styles/Input.css';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 function Input(props) {
 	const context = useContext(ThemeContext);
 	return (
 		<form>
-			<label htmlFor="location" />
-			<input
-				className="centered"
-				type="text"
-				id="location"
-				value={props.userInput}
-				onChange={(e) => props.onInputChange(e.target.value)}
+			<Autocomplete
+				freeSolo
+				id="city-drobdown"
+				options={props.cityList.map((city) => city.title)}
+				renderInput={(params) => (
+					<TextField
+						{...params}
+						label="Search input"
+						InputProps={{
+							...params.InputProps,
+							type: 'search'
+						}}
+					/>
+				)}
 			/>
-			<Button variant="contained">Hello World</Button>
 		</form>
 	);
 }

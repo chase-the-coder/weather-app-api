@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
 import Input from './components/Input';
-import Dropdown from './components/Dropdown';
 import './styles/App.css'
 import { useState } from 'react';
 function App() {
@@ -105,8 +104,7 @@ function App() {
     <>
       <div className='container'>
         <div className="dropdown">
-          <Input userInput={userInput} onInputChange={handleInputChange}/>
-          <Dropdown cityList={cityList}/>
+          <Input userInput={userInput} onInputChange={handleInputChange} cityList={cityList}/>
         </div>
       </div>
     </>
