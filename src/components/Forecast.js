@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import MediaCard from './MediaCard';
-
+import '../styles/Forecast.css'
 export default function Forecast(props) {
     const [forecastData, setForecastData] = useState([])
     const fakeForecastData = {
@@ -184,7 +184,13 @@ export default function Forecast(props) {
     // console.log(forecastData.consolidated_weather[0])
 	return (
         <>
-            <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
+            <div className="forecast-grid">
+                <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
+                <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
+                <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
+                <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
+                <MediaCard forecastData={fakeForecastData.consolidated_weather[0]}/>
+            </div>
         </>
     )
 }

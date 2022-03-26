@@ -28,28 +28,30 @@ export default function MediaCard(props) {
 	date = new Date(modifiedDate);
 	// console.log(dayOfWeek.getDay());
 	return (
-		<Card style={{ width: '18rem' }}>
-			<Card.Img
-				className="card-img"
-				variant="top"
-				src={`https://www.metaweather.com/static/img/weather/${props.forecastData.weather_state_abbr}.svg`}
-			/>
-			<Card.Body>
-				<Card.Title className="text-center">
-					{weekArray[date.getDay()]}, {months[date.getMonth()]} {date.getUTCDate()}
-				</Card.Title>
+		<div className="d-flex justify-content-center">
+			<Card style={{ width: '18rem' }}>
+				<Card.Img
+					className="card-img"
+					variant="top"
+					src={`https://www.metaweather.com/static/img/weather/${props.forecastData.weather_state_abbr}.svg`}
+				/>
+				<Card.Body>
+					<Card.Title className="text-center">
+						{weekArray[date.getDay()]}, {months[date.getMonth()]} {date.getUTCDate()}
+					</Card.Title>
 
-				<Card.Text>{props.forecastData.weather_state_name}</Card.Text>
-			</Card.Body>
-			<ListGroup className="list-group-flush">
-				<ListGroupItem>Current Temp: {Math.round(props.forecastData.the_temp)}°C</ListGroupItem>
-				<ListGroupItem>Max Temp: {Math.round(props.forecastData.max_temp)}°C </ListGroupItem>
-				<ListGroupItem>Min Temp: {Math.round(props.forecastData.min_temp)}°C</ListGroupItem>
-			</ListGroup>
-			{/* <Card.Body>
-				<Card.Link href="#">Card Link</Card.Link>
-				<Card.Link href="#">Another Link</Card.Link>
-			</Card.Body> */}
-		</Card>
+					<Card.Text>{props.forecastData.weather_state_name}</Card.Text>
+				</Card.Body>
+				<ListGroup className="list-group-flush">
+					<ListGroupItem>Current Temp: {Math.round(props.forecastData.the_temp)}°C</ListGroupItem>
+					<ListGroupItem>Max Temp: {Math.round(props.forecastData.max_temp)}°C </ListGroupItem>
+					<ListGroupItem>Min Temp: {Math.round(props.forecastData.min_temp)}°C</ListGroupItem>
+				</ListGroup>
+				{/* <Card.Body>
+                    <Card.Link href="#">Card Link</Card.Link>
+                    <Card.Link href="#">Another Link</Card.Link>
+                </Card.Body> */}
+			</Card>
+		</div>
 	);
 }
