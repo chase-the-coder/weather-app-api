@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
+import InputDropdown from './components/InputDropdown';
 import Input from './components/Input';
 import Forecast from './components/Forecast';
 import './styles/App.css'
-import { useState } from 'react';
+
 function App() {
   const fakeLocationData = [
     {
@@ -76,7 +77,6 @@ function App() {
     ]
   const [ userInput, setUserInput ] = useState('');
   const [cityList, setCityList] = useState([]);
-  const [location, setLocation] = useState('london')
   const [cityObject, setCityObject] = useState([])
 	const context = useContext(ThemeContext);
 
@@ -101,31 +101,28 @@ function App() {
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])
 
-  function handleInputChange(newInputValue) {
-    setUserInput(newInputValue)
+  function handleInputChange(e) {
+    console.log(e.target.value)
+    setUserInput(e.target.value) 
   }
-  function handleLocationSelect(e, newLocation) {
-    e.preventDefault()
-    console.log(newLocation)
-    cityList.forEach(city => {
-      if (newLocation === city.title) {
-        setCityObject(city)
-      }
-      setUserInput('')
-      // console.log(city)
-    })
-    
-    
+
+  function handleCityClick(city) {
+    console.log(city)
+    setCityList([])
+    setCityObject(city)
+    setUserInput('')
   }
-  console.log(cityObject)
+
+  // console.log(cityObject)
   // console.log(userInput)
 	return (
 
     <>
       <div className='container'>
         <div className="dropdown">
-          <Input location={location} userInput={userInput} onLocationSelect={handleLocationSelect} onInputChange={handleInputChange} cityList={cityList}/>
-          <Forecast cityObject={cityObject}   />
+          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList}/>
+          {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList}/>}
+          <Forecast cityObject={cityObject} />
         </div>
       </div>
     </>

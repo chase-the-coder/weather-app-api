@@ -1,36 +1,55 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Card, ListGroupItem, ListGroup } from 'react-bootstrap';
 import '../styles/App.css';
 
 export default function MediaCard(props) {
-	console.log('weather location data', props.forecastData);
+	// console.log('weather location data', props.forecastData);
+	let date = props.forecastData.applicable_date;
+	const dateArray = date.split('');
+	const modifiedDate = `${dateArray.slice(5, 7).join('')}/${dateArray.slice(-2).join('')}/${dateArray
+		.slice(0, 4)
+		.join('')}`;
+	// console.log(modifiedDate);
+	const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
+	const weekArray = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+	date = new Date(modifiedDate);
+	// console.log(dayOfWeek.getDay());
 	return (
-		<Card sx={{ maxWidth: 345 }}>
-			<CardMedia
-				className="center"
-				sx={{ width: 345, height: 140 }}
-				component="img"
-				image={`https://www.metaweather.com/static/img/weather/${props.forecastData.weather_state_abbr}.svg`}
-				alt="green iguana"
+		<Card style={{ width: '18rem' }}>
+			<Card.Img
+				className="card-img"
+				variant="top"
+				src={`https://www.metaweather.com/static/img/weather/${props.forecastData.weather_state_abbr}.svg`}
 			/>
-			<CardContent>
-				<Typography gutterBottom variant="h5" component="div">
-					{props.forecastData.weather_state_name}
-				</Typography>
-				<Typography variant="body2" color="text.secondary">
-					Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all
-					continents except Antarctica
-				</Typography>
-			</CardContent>
-			<CardActions>
-				<Button size="small">Share</Button>
-				<Button size="small">Learn More</Button>
-			</CardActions>
+			<Card.Body>
+				<Card.Title className="text-center">
+					{weekArray[date.getDay()]}, {months[date.getMonth()]} {date.getUTCDate()}
+				</Card.Title>
+
+				<Card.Text>{props.forecastData.weather_state_name}</Card.Text>
+			</Card.Body>
+			<ListGroup className="list-group-flush">
+				<ListGroupItem>Current Temp: {Math.round(props.forecastData.the_temp)}°C</ListGroupItem>
+				<ListGroupItem>Max Temp: {Math.round(props.forecastData.max_temp)}°C </ListGroupItem>
+				<ListGroupItem>Min Temp: {Math.round(props.forecastData.min_temp)}°C</ListGroupItem>
+			</ListGroup>
+			{/* <Card.Body>
+				<Card.Link href="#">Card Link</Card.Link>
+				<Card.Link href="#">Another Link</Card.Link>
+			</Card.Body> */}
 		</Card>
 	);
 }
