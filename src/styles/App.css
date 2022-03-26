@@ -37,11 +37,11 @@
 	}
 }
 
-.container {
+/* .container {
 	width: auto;
 	height: auto;
-	border: solid red;
-}
+	border: solid gray;
+} */
 
 .center {
 	display: block;
@@ -54,4 +54,7 @@
 	width: 25%;
 	margin-left: 25%;
 	margin-right: 25%;
+}
+.featured-image {
+	width: 50%;
 }

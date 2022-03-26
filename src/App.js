@@ -82,6 +82,21 @@ function App() {
   const [cityObject, setCityObject] = useState([])
   const [forecastData, setForecastData] = useState([])
 	const context = useContext(ThemeContext);
+  const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	]
+  const weekArray = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
 
   useEffect(() => {
     if (userInput === '') {
@@ -135,8 +150,8 @@ function App() {
         <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList}/>
           {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList}/>}
-          {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} />}
-          {forecastData.length !== 0 &&<Forecast forecastData={forecastData} />}
+          {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} months={months} weekArray={weekArray} />}
+          {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
         </div>
       </Container>
     </>
