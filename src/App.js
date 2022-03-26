@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
+import { Container } from 'react-bootstrap';
 import InputDropdown from './components/InputDropdown';
 import Input from './components/Input';
 import Forecast from './components/Forecast';
 import './styles/App.css'
+import TodaysForecast from './components/TodaysForecast';
 
 function App() {
   const fakeLocationData = [
@@ -78,6 +80,7 @@ function App() {
   const [ userInput, setUserInput ] = useState('');
   const [cityList, setCityList] = useState([]);
   const [cityObject, setCityObject] = useState([])
+  const [forecastData, setForecastData] = useState([])
 	const context = useContext(ThemeContext);
 
   useEffect(() => {
@@ -109,22 +112,33 @@ function App() {
   function handleCityClick(city) {
     console.log(city)
     setCityList([])
-    setCityObject(city)
     setUserInput('')
-  }
+    console.log(cityObject)
+            axios
+			.get(
+				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${city.woeid}`
+			)
+			.then((res) => {
+        console.log(res.data)
+        setForecastData(res.data)
 
+        
+      })
+  }
+  // console.log(forecastData)
   // console.log(cityObject)
   // console.log(userInput)
 	return (
 
     <>
-      <div className='container'>
+      <Container>
         <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList}/>
           {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList}/>}
-          <Forecast cityObject={cityObject} />
+          {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} />}
+          {forecastData.length !== 0 &&<Forecast forecastData={forecastData} />}
         </div>
-      </div>
+      </Container>
     </>
   )
 }
