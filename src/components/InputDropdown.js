@@ -6,7 +6,13 @@ export default function InputDropdown({ cityList, onCityClick }) {
 			<Dropdown.Header />
 			{cityList.map((city) => {
 				return (
-					<Dropdown.Item action key={city.woeid} onClick={() => onCityClick(city)}>
+					<Dropdown.Item
+						action
+						key={city.woeid}
+						onClick={() => {
+							onCityClick(city);
+						}}
+					>
 						{city.title}
 					</Dropdown.Item>
 				);
