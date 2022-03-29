@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Testing Prerequisites
+
+Navigate to [https://cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and click Request temporary access to the demo server button for api testing access
+
 ## Available Scripts
 
 In the project directory, you can run:
