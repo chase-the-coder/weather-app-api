@@ -158,7 +158,7 @@ function App() {
 
     <>
       
-      <Container>
+      <Container className='mt-4'>
         <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onInputSubmit={handleInputSubmit} />
           {isLoading && <Loader />}
