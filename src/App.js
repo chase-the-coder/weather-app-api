@@ -7,6 +7,7 @@ import Input from './components/Input';
 import Forecast from './components/Forecast';
 import './styles/App.css'
 import TodaysForecast from './components/TodaysForecast';
+import Loader from './components/Loading'
 
 function App() {
   const fakeLocationData = [
@@ -81,6 +82,7 @@ function App() {
   const [cityList, setCityList] = useState([]);
   const [cityObject, setCityObject] = useState([])
   const [forecastData, setForecastData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 	const context = useContext(ThemeContext);
   const months = [
 		'January',
@@ -129,6 +131,7 @@ function App() {
     setCityList([])
     setUserInput('')
     console.log(cityObject)
+    setIsLoading(true)
             axios
 			.get(
 				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${city.woeid}`
@@ -138,7 +141,7 @@ function App() {
         setForecastData(res.data)
 
         
-      })
+      }).finally(setIsLoading(false))
   }
   // console.log(forecastData)
   // console.log(cityObject)
@@ -146,9 +149,11 @@ function App() {
 	return (
 
     <>
+      
       <Container>
         <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList}/>
+          {isLoading && <Loader />}
           {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList}/>}
           {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} months={months} weekArray={weekArray} />}
           {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
