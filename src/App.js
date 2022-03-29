@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ThemeContext, ThemeProvider } from './components/ThemeContext';
+
 import { Container } from 'react-bootstrap';
 import InputDropdown from './components/InputDropdown';
 import Input from './components/Input';
@@ -83,7 +83,6 @@ function App() {
   const [cityObject, setCityObject] = useState([])
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-	// const context = useContext(ThemeContext);
   const months = [
 		'January',
 		'February',
@@ -106,17 +105,17 @@ function App() {
     }
     const delayDebounceFn = setTimeout(() => {
       console.log(userInput)
-      setCityList(fakeLocationData)
-      // axios
-			// .get(
-			// 	`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
-			// )
-			// .then((res) => {
-      //   console.log(res.data)
-      //   setCityList(res.data)
+      // setCityList(fakeLocationData)
+      axios
+			.get(
+				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
+			)
+			.then((res) => {
+        console.log(res.data)
+        setCityList(res.data)
 
         
-      // })
+      })
     }, 3000)
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])

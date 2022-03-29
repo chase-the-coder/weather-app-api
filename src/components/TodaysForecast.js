@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap';
 import '../styles/App.css';
 export default function TodaysForecast(props) {
-	const { consolidated_weather } = props.forecastData;
+	const { consolidated_weather, title } = props.forecastData;
 	let date = consolidated_weather[0].applicable_date;
 
 	const dateArray = date.split('');
@@ -12,7 +12,8 @@ export default function TodaysForecast(props) {
 	// console.log(modifiedDate);
 	date = new Date(modifiedDate);
 	return (
-		<Container className="d-flex justify-content-center m-4">
+		<Container className="d-flex align-items-center flex-column mt-4">
+			<h3 className="mb-4">Today's weather for {title}</h3>
 			<div className="d-flex justify-content-center">
 				<Card style={{ width: '20rem' }}>
 					<div className="text-center">
