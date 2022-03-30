@@ -80,7 +80,7 @@ function App() {
     ]
   const [ userInput, setUserInput ] = useState('');
   const [cityList, setCityList] = useState([]);
-  const [cityObject, setCityObject] = useState([])
+  const [cityObject, setCityObject] = useState('')
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const months = [
@@ -102,6 +102,12 @@ function App() {
   useEffect(() => {
     if (userInput === '') {
       return
+    }
+    if(cityObject) {
+      console.log('this is city oject', cityObject)
+      if(userInput === cityObject.title) {
+        return
+      }
     }
     const delayDebounceFn = setTimeout(() => {
       console.log(userInput)
@@ -131,23 +137,26 @@ function App() {
   function handleCityClick(city) {
     console.log(city)
     setCityList([])
-    setUserInput('')
-    setIsLoading(true)
+    setUserInput(city.title)
+    // setIsLoading(true)
+    setCityObject(city)
     console.log(cityObject)
     console.log(isLoading)
-            axios
-			.get(
-				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${city.woeid}`
-			)
-			.then((res) => {
-        console.log(res.data)
-        setForecastData(res.data)
 
-        
-      }).finally(setIsLoading(false))
   }
   function handleInputSubmit(e) {
     e.preventDefault()
+    setIsLoading(true)
+    axios
+    .get(
+      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${cityObject.woeid}`
+    )
+    .then((res) => {
+      console.log(res.data)
+      setForecastData(res.data)
+
+      
+    }).finally(setIsLoading(false))
 
   }
   // console.log(forecastData)
