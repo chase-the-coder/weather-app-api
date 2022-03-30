@@ -84,7 +84,7 @@ function App() {
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [buttonDisabled, setButtonDisabled] = useState(true)
-  const [alertEnabled, setAlertEnabled] = useState(true)
+  const [alertEnabled, setAlertEnabled] = useState(false)
   const months = [
 		'January',
 		'February',
@@ -101,8 +101,10 @@ function App() {
 	]
   const weekArray = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
 
+
   useEffect(() => {
     if (userInput === '') {
+      setAlertEnabled(false)
       return
     }
     if(cityObject) {
@@ -113,7 +115,7 @@ function App() {
       }
     } 
     const delayDebounceFn = setTimeout(() => {
-      console.log(userInput)
+      // console.log(userInput)
       // setCityList(fakeLocationData)
       axios
 			.get(
@@ -121,6 +123,9 @@ function App() {
 			)
 			.then((res) => {
         console.log(res.data)
+        if(res.data.length === 0) {
+          setAlertEnabled(true)
+        }
         setCityList(res.data)
 
         
@@ -166,7 +171,7 @@ function App() {
   // console.log(cityObject)
   // console.log(userInput)
   // console.log(cityList)
-  console.log(buttonDisabled)
+  // console.log(buttonDisabled)
 	return (
 
     <>

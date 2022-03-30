@@ -5,8 +5,9 @@ import { InputGroup, FormControl, Button } from 'react-bootstrap';
 function Input(props) {
 	return (
 		<form onSubmit={(e) => props.onInputSubmit(e)}>
-			<InputGroup size="lg">
+			<InputGroup size="lg" dismissible>
 				<FormControl
+					type="search"
 					placeholder="Berlin"
 					aria-label="city"
 					aria-describedby="basic-addon1"
