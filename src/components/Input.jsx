@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { ThemeContext } from './ThemeContext';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import '../styles/Input.css';
 function Input(props) {
 	return (
 		<form onSubmit={(e) => props.onInputSubmit(e)}>

@@ -1,10 +1,13 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../components/ThemeContext';
 import { Card, ListGroupItem, ListGroup } from 'react-bootstrap';
 import '../styles/App.css';
 
 export default function MediaCard(props) {
 	// console.log('weather location data', props.forecastData);
 	let date = props.forecastData.applicable_date;
+	const contextValue = useContext(ThemeContext);
+	const { temp, convert } = contextValue;
 
 	const dateArray = date.split('');
 	const modifiedDate = `${dateArray.slice(5, 7).join('')}/${dateArray.slice(-2).join('')}/${dateArray
@@ -33,9 +36,15 @@ export default function MediaCard(props) {
 					<Card.Text className="text-center">{props.forecastData.weather_state_name}</Card.Text>
 				</Card.Body>
 				<ListGroup className="list-group-flush">
-					<ListGroupItem>Current Temp: {Math.round(props.forecastData.the_temp)}°C</ListGroupItem>
-					<ListGroupItem>Max Temp: {Math.round(props.forecastData.max_temp)}°C </ListGroupItem>
-					<ListGroupItem>Min Temp: {Math.round(props.forecastData.min_temp)}°C</ListGroupItem>
+					<ListGroupItem>
+						Current Temp: {Math.round(convert(props.forecastData.the_temp))}°{temp}
+					</ListGroupItem>
+					<ListGroupItem>
+						Max Temp: {Math.round(convert(props.forecastData.max_temp))}°{temp}
+					</ListGroupItem>
+					<ListGroupItem>
+						Min Temp: {Math.round(convert(props.forecastData.min_temp))}°{temp}
+					</ListGroupItem>
 				</ListGroup>
 				{/* <Card.Body>
                     <Card.Link href="#">Card Link</Card.Link>

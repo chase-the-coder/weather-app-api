@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../components/ThemeContext';
 import { Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap';
 import '../styles/App.css';
 export default function TodaysForecast(props) {
 	const { consolidated_weather, title } = props.forecastData;
+	const contextValue = useContext(ThemeContext);
+	const { temp, convert } = contextValue;
 	let date = consolidated_weather[0].applicable_date;
 
 	const dateArray = date.split('');
@@ -32,9 +35,15 @@ export default function TodaysForecast(props) {
 						<Card.Text className="text-center">{consolidated_weather[0].weather_state_name}</Card.Text>
 					</Card.Body>
 					<ListGroup className="list-group-flush">
-						<ListGroupItem>Current Temp: {Math.round(consolidated_weather[0].the_temp)}°C</ListGroupItem>
-						<ListGroupItem>Max Temp: {Math.round(consolidated_weather[0].max_temp)}°C </ListGroupItem>
-						<ListGroupItem>Min Temp: {Math.round(consolidated_weather[0].min_temp)}°C</ListGroupItem>
+						<ListGroupItem>
+							Current Temp: {Math.round(convert(consolidated_weather[0].the_temp))}°{temp}
+						</ListGroupItem>
+						<ListGroupItem>
+							Max Temp: {Math.round(convert(consolidated_weather[0].max_temp))}°{temp}{' '}
+						</ListGroupItem>
+						<ListGroupItem>
+							Min Temp: {Math.round(convert(consolidated_weather[0].min_temp))}°{temp}
+						</ListGroupItem>
 					</ListGroup>
 					{/* <Card.Body>
                     <Card.Link href="#">Card Link</Card.Link>

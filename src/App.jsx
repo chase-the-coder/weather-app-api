@@ -8,6 +8,7 @@ import Forecast from './components/Forecast';
 import './styles/App.css'
 import TodaysForecast from './components/TodaysForecast';
 import Loader from './components/Loading'
+import CustomizedSwitches from './components/CustomizedSwitches';
 
 function App() {
   const fakeLocationData = [
@@ -108,7 +109,7 @@ function App() {
       return
     }
     if(cityObject) {
-      console.log('this is city oject', cityObject)
+     
       if(userInput === cityObject.title) {
         setButtonDisabled(false)
         return
@@ -160,24 +161,29 @@ function App() {
       `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${cityObject.woeid}`
     )
     .then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       setForecastData(res.data)
-
+      setCityObject('')
+      setButtonDisabled(true)
       
     }).finally(setIsLoading(false))
-    setCityObject('')
+    
   }
   // console.log(forecastData)
   // console.log(cityObject)
   // console.log(userInput)
   // console.log(cityList)
   // console.log(buttonDisabled)
+  // console.log('this is city oject', cityObject)
 	return (
 
     <>
       
       <Container className='mt-4'>
-        <h5>Type a city name and select from the dropown list.</h5>
+        <div className="d-flex justify-content-between">
+          <h5>Type a city name and select from the dropown list.</h5>
+          <CustomizedSwitches />
+        </div>
         <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
           {alertEnabled && <AlertBanner />}
