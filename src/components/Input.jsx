@@ -1,9 +1,8 @@
-import React, { useEffect, useContext, useState } from 'react';
-import axios from 'axios';
-import { ThemeContext } from './ThemeContext';
+import React from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import '../styles/Input.css';
-function Input(props) {
+
+const Input = (props) => {
 	return (
 		<form onSubmit={(e) => props.onInputSubmit(e)}>
 			<InputGroup size="lg" dismissible>
@@ -30,6 +29,6 @@ function Input(props) {
 			</InputGroup>
 		</form>
 	);
-}
+};
 
 export default Input;

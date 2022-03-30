@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import MediaCard from './MediaCard';
 import '../styles/Forecast.css'
-export default function Forecast(props) {
+
+const Forecast = (props) => {
     // const fakeForecastData = {
     //     "consolidated_weather": [
     //     {
@@ -184,3 +185,4 @@ export default function Forecast(props) {
         </>
     )
 }
+export default Forecast

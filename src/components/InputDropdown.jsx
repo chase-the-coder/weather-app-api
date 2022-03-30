@@ -1,6 +1,6 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 
-export default function InputDropdown({ cityList, onCityClick }) {
+const InputDropdown = ({ cityList, onCityClick }) => {
 	return (
 		<Dropdown.Menu show>
 			{cityList.length !== 0 && <Dropdown.Header>Choose from list</Dropdown.Header>}
@@ -19,4 +19,5 @@ export default function InputDropdown({ cityList, onCityClick }) {
 			})}
 		</Dropdown.Menu>
 	);
-}
+};
+export default InputDropdown;

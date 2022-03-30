@@ -3,7 +3,7 @@ import { ThemeContext } from '../components/ThemeContext';
 import { Card, ListGroupItem, ListGroup } from 'react-bootstrap';
 import '../styles/App.css';
 
-export default function MediaCard(props) {
+const MediaCard = (props) => {
 	// console.log('weather location data', props.forecastData);
 	let date = props.forecastData.applicable_date;
 	const contextValue = useContext(ThemeContext);
@@ -53,4 +53,6 @@ export default function MediaCard(props) {
 			</Card>
 		</div>
 	);
-}
+};
+
+export default MediaCard;

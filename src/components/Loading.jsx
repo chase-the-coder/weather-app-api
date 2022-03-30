@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spinner, Modal } from 'react-bootstrap';
 
-function Loading() {
+const Loading = () => {
 	return (
 		<Modal.Dialog>
 			<Modal.Body className="d-flex justify-content-center">
@@ -14,6 +14,6 @@ function Loading() {
 			</Modal.Body>
 		</Modal.Dialog>
 	);
-}
+};
 
 export default Loading;

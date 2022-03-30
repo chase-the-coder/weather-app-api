@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 const ThemeContext = createContext();
 
-function ThemeProvider(props) {
+const ThemeProvider = (props) => {
 	const [ temp, setTemp ] = useState('C');
 	function toggleTemp() {
 		if (temp === 'C') {
@@ -25,5 +25,5 @@ function ThemeProvider(props) {
 		convert
 	};
 	return <ThemeContext.Provider value={value}>{props.children}</ThemeContext.Provider>;
-}
+};
 export { ThemeContext, ThemeProvider };

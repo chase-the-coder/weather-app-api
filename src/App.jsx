@@ -10,7 +10,7 @@ import TodaysForecast from './components/TodaysForecast';
 import Loader from './components/Loading'
 import CustomizedSwitches from './components/CustomizedSwitches';
 
-function App() {
+const App = () => {
   const fakeLocationData = [
     {
     "title": "San Francisco",
@@ -135,15 +135,15 @@ function App() {
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])
 
-  function handleInputChange(e) {
+  const handleInputChange = (e) => {
     console.log(e.target.value)
     setUserInput(e.target.value) 
   }
-  function handleLoading() {
+  const handleLoading = () => {
     setIsLoading(true)
   }
 
-  function handleCityClick(city) {
+  const handleCityClick = (city) => {
     console.log(city)
     setCityList([])
     setUserInput(city.title)
@@ -153,7 +153,7 @@ function App() {
     console.log(isLoading)
 
   }
-  function handleInputSubmit(e) {
+  const handleInputSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
     axios

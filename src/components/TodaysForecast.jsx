@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { ThemeContext } from '../components/ThemeContext';
 import { Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap';
 import '../styles/App.css';
-export default function TodaysForecast(props) {
+
+const TodaysForecast = (props) => {
 	const { consolidated_weather, title } = props.forecastData;
 	const contextValue = useContext(ThemeContext);
 	const { temp, convert } = contextValue;
@@ -53,4 +54,5 @@ export default function TodaysForecast(props) {
 			</div>
 		</Container>
 	);
-}
+};
+export default TodaysForecast;

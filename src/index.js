@@ -6,13 +6,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from './components/ThemeContext';
 
-function AppWrapper() {
+const AppWrapper = () => {
 	return (
 		<ThemeProvider>
 			<App />
 		</ThemeProvider>
 	);
-}
+};
 ReactDOM.render(
 	<React.StrictMode>
 		<AppWrapper />

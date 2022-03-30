@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { ThemeContext } from '../components/ThemeContext';
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -48,7 +47,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 	}
 }));
 
-export default function CustomizedSwitches() {
+const CustomizedSwitches = () => {
 	const contextValue = useContext(ThemeContext);
 	return (
 		<FormGroup>
@@ -63,4 +62,5 @@ export default function CustomizedSwitches() {
 			</Stack>
 		</FormGroup>
 	);
-}
+};
+export default CustomizedSwitches;
