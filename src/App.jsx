@@ -119,8 +119,9 @@ const App = () => {
       // console.log(userInput)
       // setCityList(fakeLocationData)
       axios
+      //if running locally place this infront of axios url call https://cors-anywhere.herokuapp.com/
 			.get(
-				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
+				`https://www.metaweather.com/api/location/search/?query=${userInput}`
 			)
 			.then((res) => {
         console.log(res.data)
@@ -158,7 +159,8 @@ const App = () => {
     setIsLoading(true)
     axios
     .get(
-      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${cityObject.woeid}`
+      //if running locally place this infront of axios url call https://cors-anywhere.herokuapp.com/
+      `https://www.metaweather.com/api/location/${cityObject.woeid}`
     )
     .then((res) => {
       // console.log(res.data)
