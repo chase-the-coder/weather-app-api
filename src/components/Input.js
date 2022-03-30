@@ -3,7 +3,6 @@ import axios from 'axios';
 import { ThemeContext } from './ThemeContext';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 function Input(props) {
-	const context = useContext(ThemeContext);
 	return (
 		<form onSubmit={(e) => props.onInputSubmit(e)}>
 			<InputGroup size="lg">
@@ -16,9 +15,16 @@ function Input(props) {
 					}}
 					value={props.userInput}
 				/>
-				<Button variant="primary" type="submit">
-					Search
-				</Button>
+				{props.buttonDisabled ? (
+					<Button variant="primary" type="submit" disabled>
+						Search
+					</Button>
+				) : (
+					<Button variant="primary" type="submit">
+						Search
+					</Button>
+				)}
+				{}
 			</InputGroup>
 		</form>
 	);

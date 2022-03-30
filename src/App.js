@@ -83,6 +83,7 @@ function App() {
   const [cityObject, setCityObject] = useState('')
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
   const months = [
 		'January',
 		'February',
@@ -106,9 +107,10 @@ function App() {
     if(cityObject) {
       console.log('this is city oject', cityObject)
       if(userInput === cityObject.title) {
+        setButtonDisabled(false)
         return
       }
-    }
+    } 
     const delayDebounceFn = setTimeout(() => {
       console.log(userInput)
       // setCityList(fakeLocationData)
@@ -157,19 +159,20 @@ function App() {
 
       
     }).finally(setIsLoading(false))
-
+    setCityObject('')
   }
   // console.log(forecastData)
   // console.log(cityObject)
   // console.log(userInput)
   // console.log(cityList)
+  console.log(buttonDisabled)
 	return (
 
     <>
       
       <Container className='mt-4'>
         <div className="dropdown">
-          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onInputSubmit={handleInputSubmit} />
+          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
           {isLoading && <Loader />}
           {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>}
           {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} months={months} weekArray={weekArray} />}
