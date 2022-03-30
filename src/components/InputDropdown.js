@@ -3,7 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export default function InputDropdown({ cityList, onCityClick }) {
 	return (
 		<Dropdown.Menu show>
-			<Dropdown.Header>Choose from list</Dropdown.Header>
+			{cityList.length !== 0 && <Dropdown.Header>Choose from list</Dropdown.Header>}
 			{cityList.map((city) => {
 				return (
 					<Dropdown.Item

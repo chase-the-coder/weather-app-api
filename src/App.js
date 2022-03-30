@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import AlertBanner from './components/AlertBanner';
 import { Container } from 'react-bootstrap';
 import InputDropdown from './components/InputDropdown';
 import Input from './components/Input';
@@ -84,6 +84,7 @@ function App() {
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [buttonDisabled, setButtonDisabled] = useState(true)
+  const [alertEnabled, setAlertEnabled] = useState(true)
   const months = [
 		'January',
 		'February',
@@ -171,8 +172,10 @@ function App() {
     <>
       
       <Container className='mt-4'>
+        <h5>Type a city name and select from the dropown list.</h5>
         <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
+          {alertEnabled && <AlertBanner />}
           {isLoading && <Loader />}
           {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>}
           {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} months={months} weekArray={weekArray} />}
