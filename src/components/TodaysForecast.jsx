@@ -7,43 +7,43 @@ const TodaysForecast = (props) => {
 	const { current, daily } = props.forecastData;
 	const contextValue = useContext(ThemeContext);
 	const { temp, convert } = contextValue;
-	let date = consolidated_weather[0].applicable_date;
+	const date = new Date(current.dt * 1000);
+	// Hours part from the timestamp
+	const hours = date.getHours();
+	// Minutes part from the timestamp
+	const minutes = '0' + date.getMinutes();
+	// Seconds part from the timestamp
+	const seconds = '0' + date.getSeconds();
 
-	const dateArray = date.split('');
-	const modifiedDate = `${dateArray.slice(5, 7).join('')}/${dateArray.slice(-2).join('')}/${dateArray
-		.slice(0, 4)
-		.join('')}`;
-	// console.log(modifiedDate);
-	date = new Date(modifiedDate);
+	// Will display time in 10:30:23 format
+	const formattedTime = hours + ':' + minutes.substr(-2);
+
+	console.log(date);
 	return (
 		<Container className="d-flex align-items-center flex-column mt-4">
-			<h3 className="mb-4">Today's weather for {title}</h3>
+			<h3 className="mb-4">Today's weather for {props.city[0].name}</h3>
 			<div className="d-flex justify-content-center">
 				<Card style={{ width: '20rem' }}>
 					<div className="text-center">
 						<Card.Img
 							className="featured-image mt-3"
 							variant="top"
-							src={`https://www.metaweather.com/static/img/weather/${consolidated_weather[0]
-								.weather_state_abbr}.svg`}
+							src={`https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
 						/>
 					</div>
 					<Card.Body>
-						<Card.Title className="text-center">
-							{props.weekArray[date.getDay()]}, {props.months[date.getMonth()]} {date.getUTCDate()}
-						</Card.Title>
+						<Card.Title className="text-center">{current.weather[0].description}</Card.Title>
 
-						<Card.Text className="text-center">{consolidated_weather[0].weather_state_name}</Card.Text>
+						<Card.Text className="text-center">
+							{props.weekArray[date.getDay()]}, {props.months[date.getMonth()]} {date.getUTCDate()}
+						</Card.Text>
 					</Card.Body>
 					<ListGroup className="list-group-flush">
 						<ListGroupItem>
-							Current Temp: {Math.round(convert(consolidated_weather[0].the_temp))}°{temp}
+							Current Temp: {Math.round(convert(current.temp))}°{temp}
 						</ListGroupItem>
 						<ListGroupItem>
-							Max Temp: {Math.round(convert(consolidated_weather[0].max_temp))}°{temp}{' '}
-						</ListGroupItem>
-						<ListGroupItem>
-							Min Temp: {Math.round(convert(consolidated_weather[0].min_temp))}°{temp}
+							Feels Like: {Math.round(convert(current.feels_like))}°{temp}{' '}
 						</ListGroupItem>
 					</ListGroup>
 					{/* <Card.Body>

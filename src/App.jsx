@@ -16,6 +16,7 @@ const App = () => {
   const [ userInput, setUserInput ] = useState('');
   const [cityList, setCityList] = useState([]);
   const [cityObject, setCityObject] = useState('')
+  const [todayData, setTodayData] = useState('')
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [buttonDisabled, setButtonDisabled] = useState(false)
@@ -91,8 +92,9 @@ const App = () => {
       `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
     )
     .then((res) => {
+      setCityObject(res.data)
       return axios.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data[0].lat}&lon=${res.data[0].lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data[0].lat}&lon=${res.data[0].lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
       )      
     }).then(res => {
       console.log(res.data)
@@ -120,8 +122,8 @@ const App = () => {
           {alertEnabled && <AlertBanner />}
           {isLoading && <Loader />}
           {/* {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>} */}
-          {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} months={months} weekArray={weekArray} />}
-          {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
+          {forecastData.length !== 0 &&<TodaysForecast city={cityObject} forecastData={forecastData} months={months} weekArray={weekArray} />}
+          {/* {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>} */}
         </div>
       </Container>
       <Footer />
