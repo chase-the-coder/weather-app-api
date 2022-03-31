@@ -4,7 +4,7 @@ import { Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap';
 import '../styles/App.css';
 
 const TodaysForecast = (props) => {
-	const { consolidated_weather, title } = props.forecastData;
+	const { current, daily } = props.forecastData;
 	const contextValue = useContext(ThemeContext);
 	const { temp, convert } = contextValue;
 	let date = consolidated_weather[0].applicable_date;

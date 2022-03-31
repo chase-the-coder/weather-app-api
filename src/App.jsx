@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import AlertBanner from './components/AlertBanner';
 import { Container } from 'react-bootstrap';
 import InputDropdown from './components/InputDropdown';
@@ -17,7 +18,7 @@ const App = () => {
   const [cityObject, setCityObject] = useState('')
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [buttonDisabled, setButtonDisabled] = useState(true)
+  const [buttonDisabled, setButtonDisabled] = useState(false)
   const [alertEnabled, setAlertEnabled] = useState(false)
   const months = [
 		'January',
@@ -42,31 +43,31 @@ const App = () => {
       setCityList([])
       return
     }
-    if(cityObject) {
+    // if(cityObject) {
      
-      if(userInput === cityObject.title) {
-        setButtonDisabled(false)
-        return
-      }
-    } 
-    const delayDebounceFn = setTimeout(() => {
+    //   if(userInput === cityObject.title) {
+    //     setButtonDisabled(false)
+    //     return
+    //   }
+    // } 
+    // const delayDebounceFn = setTimeout(() => {
 
-      axios
+    //   axios
       
-			.get(
-				`http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
-			)
-			.then((res) => {
-        if(res.data.length === 0) {
-          setAlertEnabled(true)
-        }
-        console.log(res.data)
-        // setCityList(res.data)
+		// 	.get(
+		// 		`http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+		// 	)
+		// 	.then((res) => {
+    //     if(res.data.length === 0) {
+    //       setAlertEnabled(true)
+    //     }
+    //     console.log(res.data)
+    //     // setCityList(res.data)
 
         
-      })
-    }, 1500)
-      return () => clearTimeout(delayDebounceFn)
+    //   })
+    // }, 1500)
+    //   return () => clearTimeout(delayDebounceFn)
       }, [userInput])
 
   const handleInputChange = (e) => {
@@ -87,16 +88,17 @@ const App = () => {
     setIsLoading(true)
     axios
     .get(
-      //if running locally place this infront of axios url call https://cors-anywhere.herokuapp.com/
-      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${cityObject.woeid}`
+      `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
     )
     .then((res) => {
-
+      return axios.get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data[0].lat}&lon=${res.data[0].lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+      )      
+    }).then(res => {
+      console.log(res.data)
       setForecastData(res.data)
-      setCityObject('')
-      setButtonDisabled(true)
-      
-    }).finally(setIsLoading(false))
+    })
+    .finally(setIsLoading(false))
   }
   const handleKeyDown = (e) => {
     if (e.keyCode === 8) {
@@ -104,7 +106,6 @@ const App = () => {
       setCityList([])
     }
   }
-
 	return (
 
     <>
@@ -118,7 +119,7 @@ const App = () => {
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
           {alertEnabled && <AlertBanner />}
           {isLoading && <Loader />}
-          {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>}
+          {/* {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>} */}
           {forecastData.length !== 0 &&<TodaysForecast forecastData={forecastData} months={months} weekArray={weekArray} />}
           {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
         </div>
