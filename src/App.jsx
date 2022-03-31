@@ -48,15 +48,12 @@ const App = () => {
       }
     } 
     const delayDebounceFn = setTimeout(() => {
-      // console.log(userInput)
-      // setCityList(fakeLocationData)
       axios
       //if running locally place this infront of axios url call https://cors-anywhere.herokuapp.com/
 			.get(
 				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
 			)
 			.then((res) => {
-        console.log(res.data)
         if(res.data.length === 0) {
           setAlertEnabled(true)
         }
@@ -69,7 +66,6 @@ const App = () => {
       }, [userInput])
 
   const handleInputChange = (e) => {
-    console.log(e.target.value)
     setUserInput(e.target.value) 
   }
   const handleLoading = () => {
@@ -77,13 +73,9 @@ const App = () => {
   }
 
   const handleCityClick = (city) => {
-    console.log(city)
     setCityList([])
     setUserInput(city.title)
-    // setIsLoading(true)
     setCityObject(city)
-    console.log(cityObject)
-    console.log(isLoading)
 
   }
   const handleInputSubmit = (e) => {
@@ -95,7 +87,7 @@ const App = () => {
       `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${cityObject.woeid}`
     )
     .then((res) => {
-      // console.log(res.data)
+
       setForecastData(res.data)
       setCityObject('')
       setButtonDisabled(true)
@@ -103,12 +95,7 @@ const App = () => {
     }).finally(setIsLoading(false))
     
   }
-  // console.log(forecastData)
-  // console.log(cityObject)
-  // console.log(userInput)
-  // console.log(cityList)
-  // console.log(buttonDisabled)
-  // console.log('this is city oject', cityObject)
+  console.log('what are you looking at? :)')
 	return (
 
     <>
