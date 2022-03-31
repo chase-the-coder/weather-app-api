@@ -50,19 +50,24 @@ const App = () => {
       }
     } 
     const delayDebounceFn = setTimeout(() => {
-      axios
-      //if running locally place this infront of axios url call https://cors-anywhere.herokuapp.com/
-			.get(
-				`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
-			)
-			.then((res) => {
-        if(res.data.length === 0) {
-          setAlertEnabled(true)
-        }
-        setCityList(res.data)
+      fetch(`https://www.metaweather.com/api/location/search/?query=${userInput}`)
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+});
+      // axios
+      // //if running locally place this infront of axios url call https://cors-anywhere.herokuapp.com/
+			// .get(
+			// 	`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${userInput}`
+			// )
+			// .then((res) => {
+      //   if(res.data.length === 0) {
+      //     setAlertEnabled(true)
+      //   }
+      //   setCityList(res.data)
 
         
-      })
+      // })
     }, 1500)
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])
