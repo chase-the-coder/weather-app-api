@@ -89,7 +89,7 @@ const App = () => {
     setIsLoading(true)
     axios
     .get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
     )
     .then((res) => {
       setCityObject(res.data)
