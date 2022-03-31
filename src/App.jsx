@@ -9,6 +9,7 @@ import './styles/App.css'
 import TodaysForecast from './components/TodaysForecast';
 import Loader from './components/Loading'
 import CustomizedSwitches from './components/CustomizedSwitches';
+import Footer from './components/Footer';
 
 const App = () => {
   const [ userInput, setUserInput ] = useState('');
@@ -38,6 +39,7 @@ const App = () => {
   useEffect(() => {
     if (userInput === '') {
       setAlertEnabled(false)
+      setCityList([])
       return
     }
     if(cityObject) {
@@ -61,7 +63,7 @@ const App = () => {
 
         
       })
-    }, 1000)
+    }, 1500)
       return () => clearTimeout(delayDebounceFn)
       }, [userInput])
 
@@ -93,20 +95,25 @@ const App = () => {
       setButtonDisabled(true)
       
     }).finally(setIsLoading(false))
-    
   }
-  console.log('what are you looking at? :)')
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 8) {
+      setAlertEnabled(false)
+      setCityList([])
+    }
+  }
+
 	return (
 
     <>
       
       <Container className='mt-4'>
         <div className="d-flex justify-content-between">
-          <h5>Type a city name and select from the dropown list.</h5>
+          <h5>Type a city name, and select from the dropown list.</h5>
           <CustomizedSwitches />
         </div>
         <div className="dropdown">
-          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
+          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
           {alertEnabled && <AlertBanner />}
           {isLoading && <Loader />}
           {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>}
@@ -114,6 +121,7 @@ const App = () => {
           {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
         </div>
       </Container>
+      <Footer />
     </>
   )
 }

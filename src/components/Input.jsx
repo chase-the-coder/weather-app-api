@@ -11,6 +11,7 @@ const Input = (props) => {
 					placeholder="Berlin"
 					aria-label="city"
 					aria-describedby="basic-addon1"
+					onKeyDown={(e) => props.onKeyDown(e)}
 					onChange={(e) => {
 						props.onInputChange(e);
 					}}
