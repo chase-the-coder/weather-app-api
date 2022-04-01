@@ -4,7 +4,7 @@ import '../styles/Input.css';
 
 const Input = (props) => {
 	return (
-		<form onSubmit={(e) => props.onInputSubmit(e)}>
+		<form className="big-50" onSubmit={(e) => props.onInputSubmit(e)}>
 			<InputGroup size="lg" dismissible>
 				<FormControl
 					type="search"

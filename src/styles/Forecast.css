@@ -36,6 +36,9 @@
 	.forecast-grid {
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	}
+	.big-50 {
+		width: 50%;
+	}
 }
 
 /* Extra large devices (large desktops, 1200px and up)*/

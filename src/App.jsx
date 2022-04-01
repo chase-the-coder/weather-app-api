@@ -115,18 +115,18 @@ const App = () => {
     <>
       
       <Container className='mt-4'>
-        <div className="d-flex justify-content-between">
-          <h5>Type a city name and click search.</h5>
+        <div className='d-flex flex-column align-items-center'>
+        <div className="d-flex justify-content-between big-50">
+          <p className='mb-1'><strong>Type a city name and click search.</strong></p>
           <CustomizedSwitches />
         </div>
-        <div className="dropdown">
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
           {alertEnabled && <AlertBanner />}
+          </div>
           {isLoading && <Loader />}
           {/* {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>} */}
           {forecastData.length !== 0 &&<TodaysForecast city={cityObject} forecastData={forecastData} months={months} weekArray={weekArray} />}
           {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
-        </div>
       </Container>
       <Footer />
     </>
