@@ -17,15 +17,11 @@ const Input = (props) => {
 					}}
 					value={props.userInput}
 				/>
-				{props.buttonDisabled ? (
-					<Button variant="primary" type="submit" disabled>
+				{
+					<Button variant="primary" type="submit" onClick={() => props.onLoading()}>
 						Search
 					</Button>
-				) : (
-					<Button variant="primary" type="submit">
-						Search
-					</Button>
-				)}
+				}
 				{}
 			</InputGroup>
 		</form>

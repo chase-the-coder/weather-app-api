@@ -49,6 +49,7 @@ const App = () => {
   }
   const handleLoading = () => {
     setIsLoading(true)
+    console.log('loading now')
   }
 
   const handleInputSubmit = (e) => {
@@ -61,6 +62,7 @@ const App = () => {
     .then((res) => {
       if(res.data.length === 0) {
         setAlertEnabled(true)
+        setIsLoading(false)
       }
       setCityObject(res.data)
       return axios.get(
@@ -87,7 +89,7 @@ const App = () => {
             <p className='mb-1'><strong>Type a city name and click search.</strong></p>
             <CustomizedSwitches />
           </div>
-          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} />
+          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} onLoading={handleLoading}/>
           {alertEnabled && <AlertBanner />}
           </div>
           {isLoading && <Loader />}
