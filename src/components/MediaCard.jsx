@@ -19,7 +19,10 @@ const MediaCard = (props) => {
 					/>
 				</div>
 				<Card.Body>
-					<Card.Title className="text-center">{forecastData.weather[0].description}</Card.Title>
+					<Card.Title className="text-center">
+						{forecastData.weather[0].description.charAt(0).toUpperCase() +
+							forecastData.weather[0].description.slice(1)}
+					</Card.Title>
 
 					<Card.Text className="text-center">
 						{weekArray[date.getDay()]}, {months[date.getMonth()]} {date.getUTCDate()}
@@ -30,7 +33,7 @@ const MediaCard = (props) => {
 						Max Temp: {Math.round(convert(forecastData.temp.max))}°{temp}
 					</ListGroupItem>
 					<ListGroupItem>
-						Min Temp: {Math.round(convert(forecastData.temp.max))}°{temp}{' '}
+						Min Temp: {Math.round(convert(forecastData.temp.min))}°{temp}{' '}
 					</ListGroupItem>
 				</ListGroup>
 				{/* <Card.Body>
