@@ -20,6 +20,9 @@ const MediaCard = (props) => {
 				</div>
 				<Card.Body>
 					<Card.Title className="text-center">
+						{Math.round(convert(forecastData.temp.day))}°{temp}
+					</Card.Title>
+					<Card.Title className="text-center">
 						{forecastData.weather[0].description.charAt(0).toUpperCase() +
 							forecastData.weather[0].description.slice(1)}
 					</Card.Title>

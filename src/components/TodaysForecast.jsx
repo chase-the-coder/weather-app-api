@@ -4,10 +4,10 @@ import { Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap';
 import '../styles/App.css';
 
 const TodaysForecast = (props) => {
-	const { current } = props.forecastData;
+	const { current, daily } = props.forecastData;
 	const contextValue = useContext(ThemeContext);
 	const { temp, convert } = contextValue;
-	const date = new Date(current.dt * 1000);
+	const date = new Date(daily[0].dt * 1000);
 	return (
 		<Container className="d-flex align-items-center flex-column mt-4">
 			<h3 className="mb-4">Today's weather for {props.city[0].name}</h3>
@@ -35,10 +35,13 @@ const TodaysForecast = (props) => {
 					</Card.Body>
 					<ListGroup className="list-group-flush">
 						<ListGroupItem>
-							Current Temp: {Math.round(convert(current.temp))}°{temp}
+							Feels Like: {Math.round(convert(current.feels_like))}°{temp}{' '}
 						</ListGroupItem>
 						<ListGroupItem>
-							Feels Like: {Math.round(convert(current.feels_like))}°{temp}{' '}
+							Max Temp: {Math.round(convert(daily[0].temp.max))}°{temp}
+						</ListGroupItem>
+						<ListGroupItem>
+							Min Temp: {Math.round(convert(daily[0].temp.min))}°{temp}
 						</ListGroupItem>
 					</ListGroup>
 					{/* <Card.Body>
