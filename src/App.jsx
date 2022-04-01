@@ -78,12 +78,12 @@ const App = () => {
     setIsLoading(true)
   }
 
-  const handleCityClick = (city) => {
-    setCityList([])
-    setUserInput(city.title)
-    setCityObject(city)
+  // const handleCityClick = (city) => {
+  //   setCityList([])
+  //   setUserInput(city.title)
+  //   setCityObject(city)
 
-  }
+  // }
   const handleInputSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
@@ -116,7 +116,7 @@ const App = () => {
       
       <Container className='mt-4'>
         <div className="d-flex justify-content-between">
-          <h5>Type a city name, and select from the dropown list.</h5>
+          <h5>Type a city name and click search.</h5>
           <CustomizedSwitches />
         </div>
         <div className="dropdown">
