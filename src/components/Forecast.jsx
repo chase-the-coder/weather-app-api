@@ -3,19 +3,16 @@ import MediaCard from './MediaCard';
 import '../styles/Forecast.css'
 
 const Forecast = (props) => {
-
-        const {consolidated_weather} = props.forecastData
-        // console.log(props)
-    // console.log(consolidated_weather)
+        const {daily} = props.forecastData
 	return (
         <>
-            <div className="forecast-grid mt-4">
-                {consolidated_weather.filter((day, index) => {
+            <div className="forecast-grid mt-4 mb-4">
+                {daily.filter((day, index) => {
                     // console.log(index)
-                    return index !== 0
+                    return index < 5
                 }).map(day => {
                     // console.log(day)
-                    return  <MediaCard key={day.applicable_date} forecastData={day} months={props.months} weekArray={props.weekArray}/>
+                    return  <MediaCard key={day.dy} forecastData={day} months={props.months} weekArray={props.weekArray}/>
                 })}
             </div>
         </>

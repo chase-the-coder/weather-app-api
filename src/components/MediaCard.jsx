@@ -4,18 +4,10 @@ import { Card, ListGroupItem, ListGroup } from 'react-bootstrap';
 import '../styles/App.css';
 
 const MediaCard = (props) => {
-	// console.log('weather location data', props.forecastData);
-	let date = props.forecastData.applicable_date;
+	const { forecastData, weekArray, months } = props;
 	const contextValue = useContext(ThemeContext);
 	const { temp, convert } = contextValue;
-
-	const dateArray = date.split('');
-	const modifiedDate = `${dateArray.slice(5, 7).join('')}/${dateArray.slice(-2).join('')}/${dateArray
-		.slice(0, 4)
-		.join('')}`;
-	// console.log(modifiedDate);
-	date = new Date(modifiedDate);
-	// console.log(dayOfWeek.getDay());
+	const date = new Date(forecastData.dt * 1000);
 	return (
 		<div className="d-flex justify-content-center">
 			<Card style={{ width: '13rem' }} className="mb-4">
@@ -23,27 +15,22 @@ const MediaCard = (props) => {
 					<Card.Img
 						className="card-img mt-3"
 						variant="top"
-						src={`https://www.metaweather.com/static/img/weather/${props.forecastData
-							.weather_state_abbr}.svg`}
+						src={`https://openweathermap.org/img/wn/${forecastData.weather[0].icon}@2x.png`}
 					/>
 				</div>
 				<Card.Body>
-					<Card.Title className="text-center">{props.weekArray[date.getDay()]},</Card.Title>
-					<Card.Title className="text-center">
-						{props.months[date.getMonth()]} {date.getUTCDate()}
-					</Card.Title>
+					<Card.Title className="text-center">{forecastData.weather[0].description}</Card.Title>
 
-					<Card.Text className="text-center">{props.forecastData.weather_state_name}</Card.Text>
+					<Card.Text className="text-center">
+						{weekArray[date.getDay()]}, {months[date.getMonth()]} {date.getUTCDate()}
+					</Card.Text>
 				</Card.Body>
 				<ListGroup className="list-group-flush">
 					<ListGroupItem>
-						Current Temp: {Math.round(convert(props.forecastData.the_temp))}°{temp}
+						Max Temp: {Math.round(convert(forecastData.temp.max))}°{temp}
 					</ListGroupItem>
 					<ListGroupItem>
-						Max Temp: {Math.round(convert(props.forecastData.max_temp))}°{temp}
-					</ListGroupItem>
-					<ListGroupItem>
-						Min Temp: {Math.round(convert(props.forecastData.min_temp))}°{temp}
+						Min Temp: {Math.round(convert(forecastData.temp.max))}°{temp}{' '}
 					</ListGroupItem>
 				</ListGroup>
 				{/* <Card.Body>

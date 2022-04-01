@@ -4,21 +4,10 @@ import { Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap';
 import '../styles/App.css';
 
 const TodaysForecast = (props) => {
-	const { current, daily } = props.forecastData;
+	const { current } = props.forecastData;
 	const contextValue = useContext(ThemeContext);
 	const { temp, convert } = contextValue;
 	const date = new Date(current.dt * 1000);
-	// Hours part from the timestamp
-	const hours = date.getHours();
-	// Minutes part from the timestamp
-	const minutes = '0' + date.getMinutes();
-	// Seconds part from the timestamp
-	const seconds = '0' + date.getSeconds();
-
-	// Will display time in 10:30:23 format
-	const formattedTime = hours + ':' + minutes.substr(-2);
-
-	console.log(date);
 	return (
 		<Container className="d-flex align-items-center flex-column mt-4">
 			<h3 className="mb-4">Today's weather for {props.city[0].name}</h3>

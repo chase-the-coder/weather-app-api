@@ -123,7 +123,7 @@ const App = () => {
           {isLoading && <Loader />}
           {/* {cityList.length !== 0 && <InputDropdown onCityClick={handleCityClick} cityList={cityList} onLoading={handleLoading}/>} */}
           {forecastData.length !== 0 &&<TodaysForecast city={cityObject} forecastData={forecastData} months={months} weekArray={weekArray} />}
-          {/* {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>} */}
+          {forecastData.length !== 0 &&<Forecast forecastData={forecastData} months={months} weekArray={weekArray}/>}
         </div>
       </Container>
       <Footer />
