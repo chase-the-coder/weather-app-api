@@ -116,10 +116,10 @@ const App = () => {
       
       <Container className='mt-4'>
         <div className='d-flex flex-column align-items-center'>
-        <div className="d-flex justify-content-between big-50">
-          <p className='mb-1'><strong>Type a city name and click search.</strong></p>
-          <CustomizedSwitches />
-        </div>
+          <div className="d-flex justify-content-between big-50 pl-0">
+            <p className='mb-1'><strong>Type a city name and click search.</strong></p>
+            <CustomizedSwitches />
+          </div>
           <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
           {alertEnabled && <AlertBanner />}
           </div>

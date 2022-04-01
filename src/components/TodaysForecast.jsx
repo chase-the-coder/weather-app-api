@@ -22,6 +22,9 @@ const TodaysForecast = (props) => {
 					</div>
 					<Card.Body>
 						<Card.Title className="text-center">
+							{Math.round(convert(current.temp))}°{temp}
+						</Card.Title>
+						<Card.Title className="text-center">
 							{current.weather[0].description.charAt(0).toUpperCase() +
 								current.weather[0].description.slice(1)}
 						</Card.Title>
