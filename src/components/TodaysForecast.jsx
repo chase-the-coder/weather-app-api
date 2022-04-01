@@ -44,10 +44,6 @@ const TodaysForecast = (props) => {
 							Min Temp: {Math.round(convert(daily[0].temp.min))}°{temp}
 						</ListGroupItem>
 					</ListGroup>
-					{/* <Card.Body>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body> */}
 				</Card>
 			</div>
 		</Container>

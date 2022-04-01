@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 import AlertBanner from './components/AlertBanner';
 import { Container } from 'react-bootstrap';
 import InputDropdown from './components/InputDropdown';
@@ -16,10 +15,8 @@ const App = () => {
   const [ userInput, setUserInput ] = useState('');
   const [cityList, setCityList] = useState([]);
   const [cityObject, setCityObject] = useState('')
-  const [todayData, setTodayData] = useState('')
   const [forecastData, setForecastData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [buttonDisabled, setButtonDisabled] = useState(false)
   const [alertEnabled, setAlertEnabled] = useState(false)
   const months = [
 		'January',
@@ -44,31 +41,7 @@ const App = () => {
       setCityList([])
       return
     }
-    // if(cityObject) {
-     
-    //   if(userInput === cityObject.title) {
-    //     setButtonDisabled(false)
-    //     return
-    //   }
-    // } 
-    // const delayDebounceFn = setTimeout(() => {
-
-    //   axios
-      
-		// 	.get(
-		// 		`http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
-		// 	)
-		// 	.then((res) => {
-    //     if(res.data.length === 0) {
-    //       setAlertEnabled(true)
-    //     }
-    //     console.log(res.data)
-    //     // setCityList(res.data)
-
-        
-    //   })
-    // }, 1500)
-    //   return () => clearTimeout(delayDebounceFn)
+   
       }, [userInput])
 
   const handleInputChange = (e) => {
@@ -78,12 +51,6 @@ const App = () => {
     setIsLoading(true)
   }
 
-  // const handleCityClick = (city) => {
-  //   setCityList([])
-  //   setUserInput(city.title)
-  //   setCityObject(city)
-
-  // }
   const handleInputSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
@@ -120,7 +87,7 @@ const App = () => {
             <p className='mb-1'><strong>Type a city name and click search.</strong></p>
             <CustomizedSwitches />
           </div>
-          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} buttonDisabled={buttonDisabled} />
+          <Input  userInput={userInput} onInputChange={handleInputChange} cityList={cityList} onKeyDown={handleKeyDown} onInputSubmit={handleInputSubmit} />
           {alertEnabled && <AlertBanner />}
           </div>
           {isLoading && <Loader />}

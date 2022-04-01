@@ -39,10 +39,6 @@ const MediaCard = (props) => {
 						Min Temp: {Math.round(convert(forecastData.temp.min))}°{temp}{' '}
 					</ListGroupItem>
 				</ListGroup>
-				{/* <Card.Body>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body> */}
 			</Card>
 		</div>
 	);
