@@ -65,11 +65,13 @@ const App = () => {
         setIsLoading(false)
       }
       setCityObject(res.data)
+      console.log(res.data)
       return axios.get(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data[0].lat}&lon=${res.data[0].lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
       )      
     }).then(res => {
       setForecastData(res.data)
+      // console.log(res.data)
     })
     .finally(setIsLoading(false))
   }
